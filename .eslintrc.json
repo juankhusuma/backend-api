@@ -1,0 +1,17 @@
+{
+    "extends": "airbnb-base",
+    "rules": {
+      "no-console": "off",
+      "linebreak-style": ["error", "unix"],
+      "semi": ["error", "always"],
+      "quotes": ["error", "single"],
+      "arrow-parens": ["error", "as-needed"],
+      "comma-dangle": ["error", "never"],
+      "import/extensions": ["error", "ignorePackages"]
+    },
+    "env": {
+      "es6": true,
+      "node": true
+    }
+  }
+  
