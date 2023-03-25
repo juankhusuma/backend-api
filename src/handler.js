@@ -82,11 +82,37 @@ const getAllBooksHandler = (request, h) => {
   const { name, reading, finished } = request.query;
 
   if (!name && !reading && !finished) {
+    let data = books;
+    if (reading) {
+      if (reading === 1) {
+        data = books.filter(book => book.reading)
+      } else {
+        data = books.filter(book => !book.reading)
+      }
+    }
+
+    if (name && name !== "") {
+      data = books.filter(
+        book => 
+          book.name
+          .toLowerCase()
+          .includes(name.toLowerCase())
+      )
+    }
+
+    if (finished) {
+      if (finished === 1) {
+        data = books.filter(book => book.finished)
+      } else {
+        data = books.filter(book => !book.finished)
+      }
+    }
+
     const response = h
       .response({
         status: 'success',
         data: {
-          books: books.map((book) => ({
+          books: data.map((book) => ({
             id: book.id,
             name: book.name,
             publisher: book.publisher,
@@ -285,6 +311,7 @@ const deleteBookByIdHandler = (request, h) => {
     .code(404);
   return response;
 };
+
 
 module.exports = {
   addBookHandler,
